@@ -17,7 +17,7 @@ package com.example.androiddevchallenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val gray800 = Color(0xCC333333)  // 80% alpha
+val gray800 = Color(0xCC333333) // 80% alpha
 val gray900 = Color(0xFF333333)
 
 val rust300 = Color(0xFFE1AFAF)
@@ -27,6 +27,6 @@ val taupe100 = Color(0xFFF0EAE2)
 val taupe800 = Color(0xFF655454)
 
 val white = Color(0xFFFFFFFF)
-val white150 = Color(0x26FFFFFF)  // 15% alpha
-val white800 = Color(0xCCFFFFFF)  // 80% alpha
-val white850 = Color(0xD9FFFFFF)  // 85% alpha
+val white150 = Color(0x26FFFFFF) // 15% alpha
+val white800 = Color(0xCCFFFFFF) // 80% alpha
+val white850 = Color(0xD9FFFFFF) // 85% alpha

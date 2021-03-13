@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.R
 
-
 private val KulimPark = FontFamily(
     Font(R.font.kulimpark_light, FontWeight.W300),
     Font(R.font.kulimpark_regular, FontWeight.W400),
@@ -33,7 +32,6 @@ private val Lato = FontFamily(
     Font(R.font.lato_bold, FontWeight.W700),
     Font(R.font.lato_regular, FontWeight.W400),
 )
-
 
 // Set of Material typography styles to start with
 val typography = Typography(
