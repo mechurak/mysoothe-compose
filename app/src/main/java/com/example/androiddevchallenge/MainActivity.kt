@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = "welcome") {
-        composable("welcome") { WelcomeScreen(navController) }
+        composable("welcome") { WelcomeScreen(navController = navController) }
         composable("login") { LoginScreen(navController) }
         composable("home") { HomeScreen(navController) }
     }
