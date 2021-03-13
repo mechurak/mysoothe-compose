@@ -45,8 +45,8 @@ fun MyApp() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = "welcome") {
         composable("welcome") { WelcomeScreen(navController = navController) }
-        composable("login") { LoginScreen(navController) }
-        composable("home") { HomeScreen(navController) }
+        composable("login") { LoginScreen(navController = navController) }
+        composable("home") { HomeScreen(navController = navController) }
     }
 }
 
