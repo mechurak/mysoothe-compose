@@ -1,7 +1,13 @@
 package com.example.androiddevchallenge.ui.home
 
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -10,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.androiddevchallenge.data.Favorite
+import com.example.androiddevchallenge.data.UserData
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 
@@ -25,7 +33,9 @@ fun HomeScreen(
         color = MaterialTheme.colors.background
     ) {}
 
-    Column {
+    Column(
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) {
         TextField(
             leadingIcon = {
                 Icon(
@@ -54,7 +64,38 @@ fun HomeScreen(
                 .padding(start = 16.dp)
         )
 
-        // List
+        // 0, 2, ...
+        val evenList = UserData.favorites.filterIndexed { index, _ ->
+            ((index % 2) == 0)
+        }
+
+        // 1, 3, ...
+        val oddList = UserData.favorites.filterIndexed { index, _ ->
+            ((index % 2) == 1)
+        }
+
+        val items = mutableListOf<FavoriteColumn>()
+        for (index in oddList.indices) {
+            val odd = if (index <= oddList.size - 1) oddList[index] else null
+            val curColumn = FavoriteColumn(evenList[index], odd)
+            items.add(curColumn)
+        }
+
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            content = {
+                items(items) { item ->
+                    Column {
+                        FavoriteItem(item.even!!)
+                        Spacer(Modifier.height(8.dp))
+                        if (item.odd != null) FavoriteItem(item.odd)
+                    }
+                }
+            }
+        )
 
         Text(
             text = "ALIGN YOUR BODY",
@@ -65,18 +106,38 @@ fun HomeScreen(
                 .padding(start = 16.dp)
         )
 
-        // List
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            content = {
+                items(UserData.bodies) { subject ->
+                    SubjectItem(subject = subject)
+                }
+            }
+        )
 
         Text(
             text = "ALIGN YOUR MIND",
             style = MaterialTheme.typography.h2,
             color = MaterialTheme.colors.onBackground,
             modifier = Modifier
-                .paddingFromBaseline(top = 48.dp, bottom = 8.dp)
+                .paddingFromBaseline(top = 24.dp, bottom = 8.dp)
                 .padding(start = 16.dp)
         )
 
-        // List
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            content = {
+                items(UserData.minds) { subject ->
+                    SubjectItem(subject = subject)
+                }
+            }
+        )
     }
 }
 
@@ -87,3 +148,8 @@ fun HomeScreenPreview() {
         HomeScreen()
     }
 }
+
+data class FavoriteColumn(
+    val even: Favorite?,
+    val odd: Favorite?
+)
