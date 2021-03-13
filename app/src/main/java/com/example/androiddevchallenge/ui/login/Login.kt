@@ -8,7 +8,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -92,7 +96,12 @@ fun LoginScreen(
         }
 
         Text(
-            text = "Don't have an account? Sign up",
+            text = buildAnnotatedString {
+                append("Don't have an account? ")
+                withStyle(SpanStyle(textDecoration = TextDecoration.Underline)) {
+                    append("Sign up")
+                }
+            },
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body1,
             color = MaterialTheme.colors.onBackground,
